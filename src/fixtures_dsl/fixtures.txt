@@ -1,0 +1,4 @@
+def phone iphone;
+def postpay-tariff postpaytariff;
+
+iphone -> [postpaytariff]

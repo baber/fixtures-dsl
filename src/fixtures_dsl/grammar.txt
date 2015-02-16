@@ -1,0 +1,21 @@
+fixture-definition = {device | tariff | tariff-assignment}
+
+device = "def" device-type name ';'
+tariff = "def" tariff-type name ';'
+
+tariff-assignment = name '->' tariffs
+
+tariffs = '[' {name} ']'
+
+
+device-type = 'phone' | 'tablet'
+tariff-type = 'prepay-tariff' | 'postpay-tariff'
+
+name = {letter}
+
+letter = "a" | "b" | "c" | "d" | "e" | "f" | "g"
+       | "h" | "i" | "j" | "k" | "l" | "m" | "n"
+       | "o" | "p" | "q" | "r" | "s" | "t" | "u"
+       | "v" | "w" | "x" | "y" | "z"
+
+
