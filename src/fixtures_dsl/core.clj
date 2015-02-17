@@ -1,13 +1,17 @@
 (ns fixtures-dsl.core
-  (:require [instaparse.core :as insta])
+  (:use
+    [clojure.string :only [join]]
+   )
+  (:require
+   [instaparse.core :as insta]
+   [clojure.walk :as walk]
+   )
 )
 
 
 (def whitespace
   (insta/parser
     "whitespace = #'\\s+'"))
-
-
 
 
 
@@ -18,9 +22,35 @@
 
 (def data (fixtures-parse (slurp (clojure.java.io/resource "./fixtures_dsl/fixtures.txt"))) )
 
+(defn transform-definition [_ type name _]
+  {:meta "product-definition" :type type :name name}
+  )
+
+(defn transform-relationship [product _ targets]
+    {:meta "relationship" :product product :targets targets}
+  )
+
+(defn transform-product-list [& args]
+  (read-string (join " " args))
+  )
+
+
+(def transform-funcs {
+                      :letter str
+                      :name str
+                      :digit str
+                      :product-list transform-product-list
+                      :product transform-definition
+                      :relationship transform-relationship
+                      :type str
+                      }
+  )
+
+
+(def parse-tree (insta/transform transform-funcs data))
 
 
 
-(:fixture-definition data)
 
-(map #(.toUpperCase (str %1)) parse-tree)
+
+

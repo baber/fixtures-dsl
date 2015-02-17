@@ -6,4 +6,5 @@
   :dependencies [
                  [org.clojure/clojure "1.5.1"]
                  [instaparse "1.3.5"]
+                 [de.ubercode.clostache/clostache "1.4.0"]
                  ])

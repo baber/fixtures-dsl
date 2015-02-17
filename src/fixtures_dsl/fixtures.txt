@@ -1,4 +1,8 @@
 def phone iphone;
-def postpay-tariff postpaytariff;
+def tablet ipad;
+def postpay-tariff t1;
 
-iphone -> [postpaytariff]
+
+iphone -> [t1 t2]
+
+
