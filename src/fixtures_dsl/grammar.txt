@@ -1,8 +1,12 @@
-fixture-definition = {product | relationship}
+fixture-definition = {product | relationship | property-assignment | <comment>}
 
-product = "def" type name ';'
+product = <"def"> type name ';'
 
 relationship = name '->' product-list
+
+property-assignment = name '+=' '[' {name} ']'
+
+comment = #';[\s|\S]+'
 
 product-list = '[' {name} ']'
 
@@ -10,6 +14,7 @@ product-list = '[' {name} ']'
 type = 'phone' | 'tablet' | 'prepay-tariff' | 'postpay-tariff'
 
 name = #'[a-zA-Z0-9]+'
+
 
 letter = "a" | "b" | "c" | "d" | "e" | "f" | "g"
        | "h" | "i" | "j" | "k" | "l" | "m" | "n"

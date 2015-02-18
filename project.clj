@@ -7,4 +7,5 @@
                  [org.clojure/clojure "1.5.1"]
                  [instaparse "1.3.5"]
                  [de.ubercode.clostache/clostache "1.4.0"]
+                 [clojurewerkz/ogre "2.3.0.1"]
                  ])

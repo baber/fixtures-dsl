@@ -22,7 +22,7 @@
 
 (def data (fixtures-parse (slurp (clojure.java.io/resource "./fixtures_dsl/fixtures.txt"))) )
 
-(defn transform-definition [_ type name _]
+(defn transform-definition [type name _]
   {:meta "product-definition" :type type :name name}
   )
 
@@ -48,6 +48,8 @@
 
 
 (def parse-tree (insta/transform transform-funcs data))
+(count (tree-seq map? identity parse-tree))
+
 
 
 

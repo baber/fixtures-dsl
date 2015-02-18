@@ -2,7 +2,15 @@ def phone iphone;
 def tablet ipad;
 def postpay-tariff t1;
 
-
+; relationship creation
 iphone -> [t1 t2]
+
+; property assignment
+; iphone += [
+; outOfStock
+;    active
+;]
+
+
 
 
