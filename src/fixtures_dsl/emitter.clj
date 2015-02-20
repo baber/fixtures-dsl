@@ -4,11 +4,14 @@
    )
 )
 
+(defn extract-predicates [parse-tree]
+  (group-by #(:meta %) (rest parse-tree) )
+  )
 
 
 
 (defn render-phone [props]
-    (clostache/render "Hello, {{name}}!" {:name "Felix"})
+    (render-resource "templates/phone.mustache" props)
   )
 
 (render-phone {})

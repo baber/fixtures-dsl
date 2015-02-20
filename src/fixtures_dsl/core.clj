@@ -1,58 +1,19 @@
 (ns fixtures-dsl.core
   (:use
-    [clojure.string :only [join]]
-   )
-  (:require
-   [instaparse.core :as insta]
-   [clojure.walk :as walk]
+   [clojure.string :only [join split]]
+   [fixtures-dsl.parser :only [parse-tree]]
    )
 )
 
 
-(def whitespace
-  (insta/parser
-    "whitespace = #'\\s+'"))
-
-
-
-(def fixtures-parse
-  (insta/parser (clojure.java.io/resource "./fixtures_dsl/grammar.txt") :auto-whitespace whitespace )
-)
-
-
-(def data (fixtures-parse (slurp (clojure.java.io/resource "./fixtures_dsl/fixtures.txt"))) )
-
-(defn transform-definition [type name _]
-  {:meta "product-definition" :type type :name name}
-  )
-
-(defn transform-relationship [product _ targets]
-    {:meta "relationship" :product product :targets targets}
-  )
-
-(defn transform-product-list [& args]
-  (read-string (join " " args))
+(defn extract-predicates [parse-tree]
+  (group-by #(:meta %) (rest parse-tree) )
   )
 
 
-(def transform-funcs {
-                      :letter str
-                      :name str
-                      :digit str
-                      :product-list transform-product-list
-                      :product transform-definition
-                      :relationship transform-relationship
-                      :type str
-                      }
-  )
+(def predicates (extract-predicates parse-tree))
 
 
-(def parse-tree (insta/transform transform-funcs data))
-(count (tree-seq map? identity parse-tree))
-
-
-
-
-
+(filter #(= "product-definition" (first %))  predicates)
 
 

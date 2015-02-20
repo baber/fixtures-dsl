@@ -1,15 +1,19 @@
-def phone iphone;
-def tablet ipad;
-def postpay-tariff t1;
+def phone iphone-5s;
+def tablet ipad-air;
+def postpay-tariff tariffA;
+def prepay-tariff tariffB;
 
 ; relationship creation
-iphone -> [t1 t2]
+iphone -> [tariffA tariffB]
 
 ; property assignment
-; iphone += [
-; outOfStock
-;    active
-;]
+  iphone += [
+  outOfStock
+  active
+  ]
+
+
+
 
 
 
